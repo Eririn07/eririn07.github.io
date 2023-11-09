@@ -43,6 +43,7 @@ function calculateSumFromCSV(csvContent) {
     const lines = csvContent.split('\n');
     let sum = 0;
     let rowCount = lines.length;
+    console.log(rowCount);
 
     lines.forEach(line => {
         const numbers = line.split(',');
