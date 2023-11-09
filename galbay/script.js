@@ -18,15 +18,15 @@ function handleFile(event) {
 
         reader.onload = function (e) {
             const content = e.target.result;
-            const sum = calculateSumFromCSV(content);
+            const { sum, rowCount } = processCSV(content);
             displaySum(sum);
+            displayRowCount(rowCount);
         };
 
         reader.readAsText(file);
     }
 }
 
-// New function to handle file on page load
 function handleFileOnLoad() {
     // You can replace 'your-file.csv' with the path to your CSV file
     fetch('jomok.csv')
@@ -39,11 +39,10 @@ function handleFileOnLoad() {
         .catch(error => console.error('Error loading CSV file:', error));
 }
 
-function calculateSumFromCSV(csvContent) {
+function processCSV(csvContent) {
     const lines = csvContent.split('\n');
     let sum = 0;
     let rowCount = lines.length;
-    console.log(rowCount);
 
     lines.forEach(line => {
         const numbers = line.split(',');
@@ -64,10 +63,10 @@ function displaySum(sum) {
     document.getElementById('sum').textContent = formattedSum;
 }
 
-function formatToIDR(number) {
-    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
-}
-
 function displayRowCount(rowCount) {
     document.getElementById('rowNumber').textContent = rowCount;
+}
+
+function formatToIDR(number) {
+    return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
 }
