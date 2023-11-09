@@ -32,8 +32,9 @@ function handleFileOnLoad() {
     fetch('jomok.csv')
         .then(response => response.text())
         .then(content => {
-            const sum = calculateSumFromCSV(content);
+            const { sum, rowCount } = processCSV(content);
             displaySum(sum);
+            displayRowCount(rowCount);
         })
         .catch(error => console.error('Error loading CSV file:', error));
 }
