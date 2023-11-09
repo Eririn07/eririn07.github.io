@@ -42,6 +42,7 @@ function handleFileOnLoad() {
 function calculateSumFromCSV(csvContent) {
     const lines = csvContent.split('\n');
     let sum = 0;
+    let rowCount = lines.length;
 
     lines.forEach(line => {
         const numbers = line.split(',');
@@ -54,7 +55,7 @@ function calculateSumFromCSV(csvContent) {
         });
     });
 
-    return sum;
+    return { sum, rowCount };
 }
 
 function displaySum(sum) {
